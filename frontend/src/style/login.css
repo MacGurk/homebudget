@@ -1,0 +1,60 @@
+.auth-form {
+    width: 340px;
+    margin: 0 auto;
+}
+
+.auth-form-header {
+    margin: 0;
+    border-radius: 6px 6px 0 0;
+}
+
+.auth-form-body {
+    padding: 16px;
+    border: 1px solid black;
+    border-radius: 6px;
+}
+
+.btn {
+    margin-top: 16px;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.input-block {
+    display: block;
+    width: 100%;
+}
+
+.auth-form-body .input-block {
+    margin-top: 4px;
+    margin-bottom: 16px;
+}
+
+.p-responsive {
+    padding-right: 16px !important;
+    padding-left: 16px !important;
+}
+
+.list-style-none {
+    list-style: none !important;
+}
+
+.flex-justify-center {
+    justify-content: center !important;
+}
+
+.mr-3 {
+    margin-right: 16px !important;
+}
+
+.mt-6 {
+    margin-top: 40px !important;
+}
+.py-6 {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+}

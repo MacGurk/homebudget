@@ -1,0 +1,22 @@
+# Dependency directories
+/node_modules
+
+# Compiled binary
+/build
+
+# Coverage directory of Jest
+/coverage
+
+# dotenv environment variables file
+.env
+
+# Logs
+*.log
+
+# Sqlite database files
+*-db.sqlite
+
+# Idea IDE specific files
+/.idea/
+
+package-lock.json
