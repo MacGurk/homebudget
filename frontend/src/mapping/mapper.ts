@@ -1,7 +1,7 @@
 import { createMap, createMapper } from '@automapper/core';
 import { pojos, PojosMetadataMap } from '@automapper/pojos';
-import { CreateUser, User } from '../entities/User.entity';
-import { CreateUserDto, UserDto } from '../dto/User.dto';
+import { CreateUser, UpdatePassword, User } from '../entities/User.entity';
+import { CreateUserDto, UpdatePasswordDto, UserDto } from '../dto/User.dto';
 import { Transaction } from '../entities/Transaction.entity';
 import { TransactionDto } from '../dto/Transaction.dto';
 
@@ -10,26 +10,12 @@ export const mapper = createMapper({
 });
 
 export const createMapping = () => {
-  createMap<Transaction, TransactionDto>(
-    mapper,
-    'Transaction',
-    'TransactionDto',
-  );
-  createMap<TransactionDto, Transaction>(
-    mapper,
-    'TransactionDto',
-    'Transaction',
-  );
-  createMap<CreateUser, CreateUserDto>(
-    mapper,
-    'CreateUser',
-    'CreateUserDto',
-  );
-  createMap<UserDto, User>(
-    mapper,
-    'UserDto',
-    'User',
-  );
+  createMap<Transaction, TransactionDto>(mapper, 'Transaction', 'TransactionDto');
+  createMap<TransactionDto, Transaction>(mapper, 'TransactionDto', 'Transaction');
+  createMap<CreateUser, CreateUserDto>(mapper, 'CreateUser', 'CreateUserDto');
+  createMap<UserDto, User>(mapper, 'UserDto', 'User');
+  createMap<User, UserDto>(mapper, 'User', 'UserDto');
+  createMap<UpdatePassword, UpdatePasswordDto>(mapper, 'UpdatePassword', 'UpdatePasswordDto');
 };
 
 function createUserMetadata() {
@@ -54,6 +40,16 @@ function createUserMetadata() {
   PojosMetadataMap.create<CreateUserDto>('CreateUserDto', {
     username: String,
     email: String,
+    password: String,
+  });
+
+  PojosMetadataMap.create<UpdatePassword>('UpdatePassword', {
+    id: String,
+    password: String,
+  });
+
+  PojosMetadataMap.create<UpdatePasswordDto>('UpdatePassword', {
+    id: String,
     password: String,
   });
 }

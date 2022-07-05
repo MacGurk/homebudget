@@ -1,5 +1,5 @@
 import User from '../models/User';
-import { Op } from 'sequelize';
+import { Op, where } from 'sequelize';
 import Auth from '../../service/Auth';
 
 export default class UserRepository {
@@ -45,5 +45,23 @@ export default class UserRepository {
 
   static async create(username: string, email: string, password: string): Promise<User> {
     return await User.create({ username, email, password: Auth.hashPassword(password) });
+  }
+
+  static async updateUser(id: string, username: string, email: string): Promise<number> {
+    const affected = await User.update(
+      {
+        username: username,
+        email: email,
+      },
+      {
+        where: { id },
+      },
+    );
+
+    return affected[0];
+  }
+
+  static async updatePassword(id: string, password: string): Promise<[affectedCount: number]> {
+    return await User.update({ password: Auth.hashPassword(password) }, { where: { id } });
   }
 }

@@ -9,11 +9,8 @@ export interface CreateUserDto {
   email: string;
   password: string;
 }
-export interface UpdateUserDto {
-  username: string;
-  email: string;
-}
 
 export interface UpdatePasswordDto {
+  id: string;
   password: string;
 }

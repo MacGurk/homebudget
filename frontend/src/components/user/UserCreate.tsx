@@ -1,27 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import Title from '../../common/Title';
-import UserApi from '../../../api/userApi';
+import React, { FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Title from '../common/Title';
+import UserApi from '../../api/userApi';
+import { CreateUser } from '../../entities/User.entity';
+import Alert from '../common/Alert';
+import AlertLevel from '../../enums/AlertLevel';
 
-const UserEdit: React.FC = () => {
-  const { id } = useParams<string>();
+const UserCreate: React.FC = () => {
   const [username, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
   const userApi = new UserApi();
 
-  useEffect(() => {
-    if (id) {
-      userApi.getById(id).then((res) => {
-        setUsername(res.username);
-        setEmail(res.email);
-      });
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault();
+    const newUser: CreateUser = {
+      username,
+      email,
+      password,
+    };
+
+    try {
+      setLoading(true);
+      await userApi.add(newUser);
+      navigate(-1);
+    } catch (e: any) {
+      setError(true);
+      setErrorMessage(e.message);
+    } finally {
+      setLoading(false);
     }
-  }, []);
-
-  const handleUserUpdateSubmit = () => {
-
   };
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,15 +48,12 @@ const UserEdit: React.FC = () => {
     setPassword(event.target.value);
   };
 
-  const handleConfirmPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setConfirmPassword(event.target.value);
-  };
-
   return (
     <div>
-      <Title title={`Edit User ${id}`} />
+      <Title title="Create new user" />
       <div className="mx-3">
-        <form onSubmit={handleUserUpdateSubmit}>
+        {error && <Alert message={errorMessage} level={AlertLevel.Error} />}
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="username">Username</label>
             <input
@@ -71,13 +80,6 @@ const UserEdit: React.FC = () => {
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary">
-            Update
-          </button>
-        </form>
-        <hr />
-        <h3>Change Password</h3>
-        <form>
           <div className="form-group">
             <label htmlFor="password">Password</label>
             <input
@@ -85,27 +87,20 @@ const UserEdit: React.FC = () => {
               type="text"
               className="form-control"
               id="password"
-              placeholder="Enter new password"
+              placeholder="Enter password of user"
               onChange={handlePasswordChange}
               value={password}
               required
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="confirmPassword">Confirm password</label>
-            <input
-              name="password"
-              type="text"
-              className="form-control"
-              id="password"
-              placeholder="Confirm password"
-              onChange={handleConfirmPasswordChange}
-              value={password}
-              required
-            />
-          </div>
           <button type="submit" className="btn btn-primary">
-            Change password
+            {loading ? (
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            ) : (
+              'Submit'
+            )}
           </button>
         </form>
       </div>
@@ -113,4 +108,4 @@ const UserEdit: React.FC = () => {
   );
 };
 
-export default UserEdit;
+export default UserCreate;

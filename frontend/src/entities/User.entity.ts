@@ -10,11 +10,7 @@ export interface CreateUser {
   password: string;
 }
 
-export interface UpdateUser {
-  username: string;
-  email: string;
-}
-
 export interface UpdatePassword {
+  id: string;
   password: string;
 }
