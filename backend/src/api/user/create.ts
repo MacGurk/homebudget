@@ -17,7 +17,6 @@ interface CreateRequest {
 type CreateResponse = UserDto | Error;
 
 export default Router().post('/', async (req: Request, res: Response<CreateResponse>) => {
-  console.log(req.body);
   const { username, email, password } = req.body as CreateRequest;
 
   if (await UserRepository.existsByUsername(username)) {
