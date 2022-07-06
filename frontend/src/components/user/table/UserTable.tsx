@@ -1,8 +1,14 @@
 import React from 'react';
 import { User } from '../../../entities/User.entity';
 import UserRow from './UserRow';
+import UserApi from '../../../api/userApi';
 
-const UserTable: React.FC<{ users: User[] }> = ({ users }) => (
+interface UserTableProps {
+  users: User[];
+  deleteUser: (user: User) => void;
+}
+
+const UserTable: React.FC<UserTableProps> = ({ users, deleteUser }) => (
   <div className="mx-3 border rounded">
     <table className="table table-striped" id="transactionTable">
       <thead>
@@ -16,7 +22,7 @@ const UserTable: React.FC<{ users: User[] }> = ({ users }) => (
       </thead>
       <tbody>
         {users.map((user) => (
-          <UserRow user={user} />
+          <UserRow user={user} deleteUser={deleteUser} />
         ))}
       </tbody>
     </table>

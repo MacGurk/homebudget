@@ -64,4 +64,8 @@ export default class UserRepository {
   static async updatePassword(id: string, password: string): Promise<[affectedCount: number]> {
     return await User.update({ password: Auth.hashPassword(password) }, { where: { id } });
   }
+
+  static async delete(id: string): Promise<number> {
+    return await User.destroy({ where: { id } });
+  }
 }

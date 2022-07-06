@@ -2,7 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { User } from '../../../entities/User.entity';
 
-const TransactionRow: React.FC<{ user: User }> = ({ user }) => (
+interface TransactionProps {
+  user: User;
+  deleteUser: (user: User) => void;
+}
+
+const TransactionRow: React.FC<TransactionProps> = ({ user, deleteUser }) => (
   <tr>
     <td data-label="Data">{user.username}</td>
     <td data-label="User">{user.email}</td>
@@ -13,7 +18,7 @@ const TransactionRow: React.FC<{ user: User }> = ({ user }) => (
         </button>
       </Link>
 
-      <button type="button" className="btn btn-danger btn-sm">
+      <button type="button" className="btn btn-danger btn-sm" onClick={() => deleteUser(user)}>
         <i className="fa fa-trash" />
       </button>
     </td>

@@ -53,6 +53,12 @@ export default class UserApi {
     await this.checkResponse(response, method);
   }
 
+  public async delete(id: string): Promise<void> {
+    const method = 'DELETE';
+    const response = await fetch(`${this.path}/${id}`, { method });
+    await this.checkResponse(response, method);
+  }
+
   protected getHeaders = () => ({
     'Content-Type': 'application/json',
   });

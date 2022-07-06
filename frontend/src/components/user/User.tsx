@@ -11,11 +11,20 @@ function Users() {
   const userApi = new UserApi();
 
   useEffect(() => {
-    userApi.get()
-      .then((res) => {
-        setUsers(res);
-      });
+    userApi.get().then((res) => {
+      setUsers(res);
+    });
   }, []);
+
+  const handleDelete = (user: User) => {
+    // TODO: Confirm dialog & add to UserCards
+    try {
+      console.log(`DELETE: ${user.id}`);
+      // await userApi.delete(user.id);
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
     <div>
@@ -26,7 +35,7 @@ function Users() {
       {window.screen.availWidth < 512 ? (
         <UserCards users={users} />
       ) : (
-        <UserTable users={users} />
+        <UserTable users={users} deleteUser={handleDelete} />
       )}
     </div>
   );
