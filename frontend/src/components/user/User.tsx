@@ -14,9 +14,14 @@ function Users() {
   const userApi = new UserApi();
 
   useEffect(() => {
-    userApi.get().then((res) => {
-      setUsers(res);
-    });
+    try {
+      setLoading(true);
+      userApi.get().then((res) => setUsers(res));
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   const handleDelete = async (user: User) => {
@@ -46,12 +51,12 @@ function Users() {
       <Link to="/user/newUser">
         <i className="fa fa-plus-square fa-2x ps-4 pb-3" />
       </Link>
-      {loading && <Loading />}
       {window.screen.availWidth < 512 ? (
         <UserCards users={users} editUser={handleEdit} deleteUser={handleDelete} />
       ) : (
         <UserTable users={users} editUser={handleEdit} deleteUser={handleDelete} />
       )}
+      {loading && <Loading />}
     </div>
   );
 }
