@@ -25,7 +25,7 @@ function Nav() {
             <Link to="/">Dashboard</Link>
           </li>
           <li className="nav-item nav-link">
-            <Link to="/transactions">Transactions</Link>
+            <Link to="/transaction">Transactions</Link>
           </li>
           <li className="nav-item nav-link">
             <Link to="/user">Users</Link>
