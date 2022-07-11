@@ -73,13 +73,7 @@ const TransactionForm: React.FC<{ id: string | undefined }> = ({ id }): ReactEle
       <div className="form-group">
         <label htmlFor="transactionuser">
           User
-          <select
-            name="user"
-            className="form-control"
-            id="transactionuser"
-            value={user}
-            onChange={handleUserChange}
-          >
+          <select name="user" className="form-control" id="transactionuser" value={user} onChange={handleUserChange}>
             {users.map((userSelect: User) => (
               <option value={userSelect.id}>{userSelect.username}</option>
             ))}

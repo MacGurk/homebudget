@@ -1,7 +1,7 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 import { v4 as uuidv4 } from 'uuid';
 import User from './User';
-import {AutoMap} from '@automapper/classes';
+import { AutoMap } from '@automapper/classes';
 
 export default class Transaction extends Model {
   @AutoMap()
@@ -11,7 +11,7 @@ export default class Transaction extends Model {
   declare date: Date;
 
   @AutoMap(() => User)
-  declare User: User;
+  declare user: User;
 
   @AutoMap()
   declare description: string;

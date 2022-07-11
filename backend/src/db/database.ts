@@ -14,7 +14,7 @@ const db = (env: AppEnv): Sequelize => {
   });
 
   User.hasMany(Transaction);
-  Transaction.belongsTo(User, {});
+  Transaction.belongsTo(User, { as: 'user' });
 
   return sequelize;
 };

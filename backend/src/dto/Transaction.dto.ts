@@ -1,5 +1,5 @@
-import {AutoMap} from '@automapper/classes';
-import {UserDto} from './User.dto';
+import { AutoMap } from '@automapper/classes';
+import { UserDto } from './User.dto';
 
 export class TransactionDto {
   @AutoMap()
@@ -9,7 +9,7 @@ export class TransactionDto {
   public date: Date;
 
   @AutoMap(() => UserDto)
-  public User: UserDto;
+  public user: UserDto;
 
   @AutoMap()
   public description: string;
