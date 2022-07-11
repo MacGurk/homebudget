@@ -37,6 +37,15 @@
             "required":  {
             "some": [ "nesting", "id" ]
         }} ],
-        "max-len": [ "error", { "code":  120 }]
+        "max-len": [ "warn", { "code":  120 }],
+        "object-curly-newline": [
+            "error",
+            {
+                "ObjectExpression": { "consistent": true, "multiline": true },
+                "ObjectPattern": { "consistent": true, "multiline": true },
+                "ImportDeclaration": "never",
+                "ExportDeclaration": { "multiline": true, "minProperties": 3 }
+            }
+        ]
     }
 }
