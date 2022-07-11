@@ -14,8 +14,8 @@ const App: React.FC = () => (
   <Routes>
     <Route path="/" element={<Content />}>
       <Route index element={<Dashboard />} />
-      <Route path="transactions" element={<Transactions />} />
-      <Route path="transactions/:id" element={<TransactionEdit />} />
+      <Route path="transaction" element={<Transactions />} />
+      <Route path="transaction/:transactionId" element={<TransactionEdit />} />
       <Route path="user" element={<Users />} />
       <Route path="user/newUser" element={<UserCreate />} />
       <Route path="user/:id" element={<UserEdit />} />
