@@ -35,10 +35,18 @@ const TransactionsTable: React.FC<TransactionsTableProps> = ({ transactions, edi
               )}
             </td>
             <td data-label="Actions">
-              <button type="button" className="btn btn-primary btn-sm" onClick={() => editTransaction(transaction.id)}>
+              <button
+                type="button"
+                className="btn btn-primary btn-sm m-0"
+                onClick={() => editTransaction(transaction.id)}
+              >
                 <i className="fa fa-edit" />
               </button>
-              <button type="button" className="btn btn-danger btn-sm" onClick={() => deleteTransaction(transaction)}>
+              <button
+                type="button"
+                className="btn btn-danger btn-sm m-0"
+                onClick={() => deleteTransaction(transaction)}
+              >
                 <i className="fa fa-trash" />
               </button>
             </td>
