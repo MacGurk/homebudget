@@ -10,24 +10,13 @@ import TransactionsFilter from './TransactionsFilter';
 
 const Transactions: React.FC = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [month, setMonth] = useState(new Date().getMonth());
-  const [year, setYear] = useState(new Date().getFullYear());
+  const [month, setMonth] = useState<number>(new Date().getMonth());
+  const [year, setYear] = useState<number>(new Date().getFullYear());
   const [years, setYears] = useState<number[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const navigate = useNavigate();
   const transactionApi = new TransactionApi();
-
-  useEffect(() => {
-    try {
-      setLoading(true);
-      transactionApi.getYears().then((res) => setYears(res));
-    } catch (e) {
-      console.error(e);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
 
   const fetchTransactions = () => {
     try {
@@ -39,6 +28,20 @@ const Transactions: React.FC = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    try {
+      setLoading(true);
+      transactionApi.getYears().then((res) => {
+        setYears(res);
+        setYear(res[res.length - 1]);
+      });
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     fetchTransactions();
@@ -88,9 +91,6 @@ const Transactions: React.FC = () => {
           changeYear={handleYearChange}
         />
       </div>
-      <Link to="/transactions/new">
-        <i className="fa fa-plus-square fa-2x ps-4 pb-3" />
-      </Link>
       {window.screen.availWidth < 512 ? (
         <TransactionCards transactions={transactions} editTransaction={handleEdit} deleteTransaction={handleDelete} />
       ) : (
