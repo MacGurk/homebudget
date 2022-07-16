@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Title from '../common/Title';
-import UserTable from './table/UserTable';
+import UserTable from './UserTable';
 import { User } from '../../entities/User.entity';
-import UserCards from './cards/UserCards';
+import UserCards from './UserCards';
 import UserApi from '../../api/userApi';
 import Loading from '../common/Loading';
 

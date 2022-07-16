@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import TransactionCards from './cards/TransactionCards';
-import TransactionsTable from './table/TransactionsTable';
+import TransactionCards from './TransactionCards';
+import TransactionsTable from './TransactionsTable';
 import Title from '../common/Title';
 import { Transaction } from '../../entities/Transaction.entity';
 import TransactionApi from '../../api/transactionApi';

@@ -51,58 +51,62 @@ const UserCreate: React.FC = () => {
   return (
     <div>
       <Title title="Create new user" />
-      <div className="mx-3">
-        {error && <Alert message={errorMessage} level={AlertLevel.Error} />}
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="username">Username</label>
-            <input
-              name="username"
-              type="text"
-              className="form-control"
-              id="username"
-              placeholder="Enter username of user"
-              onChange={handleUsernameChange}
-              value={username}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="email">E-Mail</label>
-            <input
-              name="email"
-              type="text"
-              className="form-control"
-              id="email"
-              placeholder="Enter E-Mail of user"
-              onChange={handleEmailChange}
-              value={email}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
-              name="password"
-              type="text"
-              className="form-control"
-              id="password"
-              placeholder="Enter password of user"
-              onChange={handlePasswordChange}
-              value={password}
-              required
-            />
-          </div>
-          <button type="submit" className="btn btn-primary">
-            {loading ? (
-              <div className="spinner-border" role="status">
-                <span className="visually-hidden">Loading...</span>
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-10 col-md-4 p-4 border rounded shadow">
+            {error && <Alert message={errorMessage} level={AlertLevel.Error} />}
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label htmlFor="username">Username</label>
+                <input
+                  name="username"
+                  type="text"
+                  className="form-control"
+                  id="username"
+                  placeholder="Enter username of user"
+                  onChange={handleUsernameChange}
+                  value={username}
+                  required
+                />
               </div>
-            ) : (
-              'Submit'
-            )}
-          </button>
-        </form>
+              <div className="form-group">
+                <label htmlFor="email">E-Mail</label>
+                <input
+                  name="email"
+                  type="text"
+                  className="form-control"
+                  id="email"
+                  placeholder="Enter E-Mail of user"
+                  onChange={handleEmailChange}
+                  value={email}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input
+                  name="password"
+                  type="text"
+                  className="form-control"
+                  id="password"
+                  placeholder="Enter password of user"
+                  onChange={handlePasswordChange}
+                  value={password}
+                  required
+                />
+              </div>
+              <button type="submit" className="btn btn-primary">
+                {loading ? (
+                  <div className="spinner-border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                ) : (
+                  'Submit'
+                )}
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   );

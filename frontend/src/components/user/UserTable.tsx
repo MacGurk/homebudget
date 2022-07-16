@@ -1,5 +1,5 @@
 import React from 'react';
-import { User } from '../../../entities/User.entity';
+import { User } from '../../entities/User.entity';
 
 interface UserTableProps {
   users: User[];

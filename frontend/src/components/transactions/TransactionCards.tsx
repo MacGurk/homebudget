@@ -1,5 +1,5 @@
 import React from 'react';
-import { Transaction } from '../../../entities/Transaction.entity';
+import { Transaction } from '../../entities/Transaction.entity';
 
 interface TransactionsCardProps {
   transactions: Transaction[];

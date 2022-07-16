@@ -100,86 +100,90 @@ const UserEdit: React.FC = () => {
   return (
     <div>
       <Title title={`Edit User ${id}`} />
-      <div className="mx-3">
-        {error && <Alert message={errorMessage} level={AlertLevel.Error} />}
-        <form onSubmit={handleUserUpdateSubmit}>
-          <div className="form-group">
-            <label htmlFor="username">Username</label>
-            <input
-              name="username"
-              type="text"
-              className="form-control"
-              id="username"
-              placeholder="Enter username of user"
-              onChange={handleUsernameChange}
-              value={username}
-              required
-            />
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-10 col-md-4 p-4 border rounded shadow">
+            {error && <Alert message={errorMessage} level={AlertLevel.Error} />}
+            <form onSubmit={handleUserUpdateSubmit}>
+              <div className="form-group">
+                <label htmlFor="username">Username</label>
+                <input
+                  name="username"
+                  type="text"
+                  className="form-control"
+                  id="username"
+                  placeholder="Enter username of user"
+                  onChange={handleUsernameChange}
+                  value={username}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="email">E-Mail</label>
+                <input
+                  name="email"
+                  type="text"
+                  className="form-control"
+                  id="email"
+                  placeholder="Enter E-Mail of user"
+                  onChange={handleEmailChange}
+                  value={email}
+                  required
+                />
+              </div>
+              <button type="submit" className="btn btn-primary" disabled={loading}>
+                {loading ? (
+                  <>
+                    <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true" />
+                    Loading...
+                  </>
+                ) : (
+                  'Update User'
+                )}
+              </button>
+            </form>
+            <hr />
+            <h3>Change Password</h3>
+            <form onSubmit={handlePasswordUpdateSubmit}>
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input
+                  name="password"
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  placeholder="Enter new password"
+                  onChange={handlePasswordChange}
+                  value={password}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="confirmPassword">Confirm password</label>
+                <input
+                  name="password"
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  placeholder="Confirm password"
+                  onChange={handleConfirmPasswordChange}
+                  value={confirmPassword}
+                  required
+                />
+              </div>
+              <button type="submit" className="btn btn-primary" disabled={loading}>
+                {loading ? (
+                  <>
+                    <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true" />
+                    Loading...
+                  </>
+                ) : (
+                  'Change Password'
+                )}
+              </button>
+            </form>
           </div>
-          <div className="form-group">
-            <label htmlFor="email">E-Mail</label>
-            <input
-              name="email"
-              type="text"
-              className="form-control"
-              id="email"
-              placeholder="Enter E-Mail of user"
-              onChange={handleEmailChange}
-              value={email}
-              required
-            />
-          </div>
-          <button type="submit" className="btn btn-primary" disabled={loading}>
-            {loading ? (
-              <>
-                <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true" />
-                Loading...
-              </>
-            ) : (
-              'Update User'
-            )}
-          </button>
-        </form>
-        <hr />
-        <h3>Change Password</h3>
-        <form onSubmit={handlePasswordUpdateSubmit}>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
-              name="password"
-              type="password"
-              className="form-control"
-              id="password"
-              placeholder="Enter new password"
-              onChange={handlePasswordChange}
-              value={password}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="confirmPassword">Confirm password</label>
-            <input
-              name="password"
-              type="password"
-              className="form-control"
-              id="password"
-              placeholder="Confirm password"
-              onChange={handleConfirmPasswordChange}
-              value={confirmPassword}
-              required
-            />
-          </div>
-          <button type="submit" className="btn btn-primary" disabled={loading}>
-            {loading ? (
-              <>
-                <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true" />
-                Loading...
-              </>
-            ) : (
-              'Change Password'
-            )}
-          </button>
-        </form>
+        </div>
       </div>
     </div>
   );

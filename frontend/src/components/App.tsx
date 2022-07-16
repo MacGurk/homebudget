@@ -6,7 +6,7 @@ import NoMatch from './misc/NoMatch';
 import Dashboard from './dashboard/Dashboard';
 import Transactions from './transactions/Transactions';
 import Users from './user/User';
-import TransactionEdit from './transactions/edit/TransactionEdit';
+import TransactionEdit from './transactions/TransactionEdit';
 import UserEdit from './user/UserEdit';
 import UserCreate from './user/UserCreate';
 
