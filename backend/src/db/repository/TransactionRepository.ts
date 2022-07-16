@@ -66,16 +66,18 @@ export default class TransactionRepository {
     description: string,
     price: number,
     userId: string,
-  ): Promise<Transaction> {
-    await Transaction.update(
+    settled: boolean,
+  ): Promise<number> {
+    const affected = await Transaction.update(
       {
         date: date,
         description: description,
         price: price,
         UserId: userId,
+        settled: settled,
       },
       { where: { id } },
     );
-    return await this.findById(id);
+    return affected[0];
   }
 }

@@ -44,7 +44,7 @@ const TransactionEdit: React.FC = () => {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    const newTransaction: Transaction = {
+    const transaction: Transaction = {
       id,
       date,
       user,
@@ -52,10 +52,18 @@ const TransactionEdit: React.FC = () => {
       price,
       settled,
     };
-    try {
-      await transactionApi.add(newTransaction);
-    } catch (e) {
-      console.error(e);
+    if (id === 'new') {
+      try {
+        await transactionApi.add(transaction);
+      } catch (e) {
+        console.error(e);
+      }
+    } else {
+      try {
+        await transactionApi.update(transaction);
+      } catch (e) {
+        console.error(e);
+      }
     }
   };
 

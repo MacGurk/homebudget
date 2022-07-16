@@ -1,24 +1,37 @@
 import { Request, Response, Router } from 'express';
 import TransactionRepository from '../../db/repository/TransactionRepository';
-import {TransactionDto} from '../../dto/Transaction.dto';
-import {mapper} from '../../mappings/mapper';
-import Transaction from '../../db/models/Transaction';
+import { TransactionDto } from '../../dto/Transaction.dto';
+import User from '../../db/models/User';
 
 interface UpdateTransactionRequest {
   date: Date;
-  userId: string;
+  user: User;
   description: string;
   price: number;
+  settled: boolean;
 }
 
 export default Router().put('/:transactionid', async (req: Request, res: Response<TransactionDto>) => {
-  let transaction = await TransactionRepository.findById(req.params.transactionid);
+  const transaction = await TransactionRepository.findById(req.params.transactionid);
   if (!transaction) {
     res.status(404).send();
+    return;
   }
-  const { date, userId, description, price } = req.body as UpdateTransactionRequest;
+  const { date, user, description, price, settled } = req.body as UpdateTransactionRequest;
 
-  transaction = await TransactionRepository.update(transaction.id, date, description, price, userId);
+  const affectedRows = await TransactionRepository.update(
+    req.params.transactionid,
+    date,
+    description,
+    price,
+    user.id,
+    settled,
+  );
 
-  res.send(mapper.map(transaction, Transaction, TransactionDto));
+  if (affectedRows == 0) {
+    res.sendStatus(400);
+    return;
+  }
+
+  res.sendStatus(204);
 });

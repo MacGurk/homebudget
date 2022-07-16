@@ -54,6 +54,16 @@ export default class TransactionApi {
     return mapper.map<TransactionDto, Transaction>(transactionDto, 'TransactionDto', 'Transaction');
   }
 
+  public async update(transaction: Transaction): Promise<void> {
+    const method = 'PUT';
+    const response = await fetch(`${this.path}/${transaction.id}`, {
+      method,
+      headers: this.getHeaders(),
+      body: JSON.stringify(mapper.map<Transaction, TransactionDto>(transaction, 'Transaction', 'TransactionDto')),
+    });
+    await this.checkResponse(response);
+  }
+
   public async delete(id: string): Promise<void> {
     const method = 'DELETE';
     const response = await fetch(`${this.path}/${id}`, { method });

@@ -1,4 +1,4 @@
-import { createMap, createMapper, mapFrom } from '@automapper/core';
+import { createMap, createMapper } from '@automapper/core';
 import { sequelize } from '@automapper/sequelize';
 import { UserDto } from '../dto/User.dto';
 import User from '../db/models/User';
