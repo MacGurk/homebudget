@@ -36,8 +36,26 @@ export default class TransactionApi {
     ));
   }
 
+  public async getByUserId(userId: string): Promise<Transaction[]> {
+    const response = await fetch(`${this.path}/?userId=${userId}`);
+    await this.checkResponse(response);
+    const transaction = await response.json();
+    // prettier-ignore
+    return transaction.map((i: TransactionDto) => mapper.map<TransactionDto, Transaction>(
+      i,
+      'TransactionDto',
+      'Transaction',
+    ));
+  }
+
   public async getYears(): Promise<number[]> {
     const response = await fetch(`${this.path}/years`);
+    await this.checkResponse(response);
+    return response.json();
+  }
+
+  public async getUnsettledAmount(userId: string): Promise<number> {
+    const response = await fetch(`${this.path}/unsettledAmount?userId=${userId}`);
     await this.checkResponse(response);
     return response.json();
   }

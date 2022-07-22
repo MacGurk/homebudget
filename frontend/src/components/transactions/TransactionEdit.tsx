@@ -52,7 +52,7 @@ const TransactionEdit: React.FC = () => {
       price,
       settled,
     };
-    if (id === 'new') {
+    if (transactionId === 'new') {
       try {
         await transactionApi.add(transaction);
       } catch (e) {

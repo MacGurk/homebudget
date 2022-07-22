@@ -3,12 +3,12 @@ import User from '../models/User';
 import { Op } from 'sequelize';
 
 export default class TransactionRepository {
-  static async findAll(): Promise<Transaction[]> {
-    return await Transaction.findAll({ include: { model: User, as: 'user' } });
-  }
-
   static async findById(id: string): Promise<Transaction> {
     return await Transaction.findOne({ where: { id }, include: { model: User, as: 'user' } });
+  }
+
+  static async findByUserId(userId: string): Promise<Transaction[]> {
+    return await Transaction.findAll({ where: { UserId: userId }, include: { model: User, as: 'user' } });
   }
 
   static async findByMonthYear(month: number, year: number): Promise<Transaction[]> {
@@ -37,6 +37,16 @@ export default class TransactionRepository {
     });
     years.sort();
     return years;
+  }
+
+  static async getUnsettledAmountByUser(userId: string): Promise<number> {
+    const unsettledAmount = await Transaction.sum('price', { where: { UserId: userId, settled: false } });
+
+    if (!unsettledAmount) {
+      return 0;
+    }
+
+    return unsettledAmount;
   }
 
   static async create(
