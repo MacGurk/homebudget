@@ -9,11 +9,13 @@ import Users from './user/User';
 import TransactionEdit from './transactions/TransactionEdit';
 import UserEdit from './user/UserEdit';
 import UserCreate from './user/UserCreate';
+import Settle from './settle/Settle';
 
 const App: React.FC = () => (
   <Routes>
     <Route path="/" element={<Content />}>
       <Route index element={<Dashboard />} />
+      <Route path="settle" element={<Settle />} />
       <Route path="transaction" element={<Transactions />} />
       <Route path="transaction/:transactionId" element={<TransactionEdit />} />
       <Route path="user" element={<Users />} />

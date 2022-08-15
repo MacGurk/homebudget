@@ -30,6 +30,11 @@ function Nav() {
               </Link>
             </li>
             <li className="nav-item">
+              <Link className={`nav-link ${location.pathname === '/settle' ? 'active' : ''}`} to="/settle">
+                Settle
+              </Link>
+            </li>
+            <li className="nav-item">
               <Link
                 className={`nav-link ${location.pathname.includes('/transaction') ? 'active' : ''}`}
                 to="/transaction"

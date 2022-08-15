@@ -39,6 +39,10 @@ export default class TransactionRepository {
     return years;
   }
 
+  static async getTotalUnsettledAmount(): Promise<number> {
+    return await Transaction.sum('price', { where: { settled: false } });
+  }
+
   static async getUnsettledAmountByUser(userId: string): Promise<number> {
     const unsettledAmount = await Transaction.sum('price', { where: { UserId: userId, settled: false } });
 

@@ -48,6 +48,18 @@ export default class TransactionApi {
     ));
   }
 
+  public async getUnsettled(): Promise<Transaction[]> {
+    const response = await fetch(`${this.path}/?settled=false`);
+    await this.checkResponse(response);
+    const transaction = await response.json();
+    // prettier-ignore
+    return transaction.map((i: TransactionDto) => mapper.map<TransactionDto, Transaction>(
+      i,
+      'TransactionDto',
+      'Transaction',
+    ));
+  }
+
   public async getYears(): Promise<number[]> {
     const response = await fetch(`${this.path}/years`);
     await this.checkResponse(response);

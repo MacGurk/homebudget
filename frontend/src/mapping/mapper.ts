@@ -4,12 +4,15 @@ import { CreateUser, UpdatePassword, User } from '../entities/User.entity';
 import { CreateUserDto, UpdatePasswordDto, UserDto } from '../dto/User.dto';
 import { Transaction } from '../entities/Transaction.entity';
 import { TransactionDto } from '../dto/Transaction.dto';
+import { Settlement } from '../entities/Settlement.entity';
+import { SettlementDto } from '../dto/Settlement.dto';
 
 export const mapper = createMapper({
   strategyInitializer: pojos(),
 });
 
 export const createMapping = () => {
+  createMap<SettlementDto, Settlement>(mapper, 'SettlementDto', 'Settlement');
   createMap<Transaction, TransactionDto>(mapper, 'Transaction', 'TransactionDto');
   createMap<TransactionDto, Transaction>(mapper, 'TransactionDto', 'Transaction');
   createMap<CreateUser, CreateUserDto>(mapper, 'CreateUser', 'CreateUserDto');
@@ -74,8 +77,23 @@ function createTransactionMetadata() {
   });
 }
 
+function createSettlementMetadata() {
+  PojosMetadataMap.create<Settlement>('Settlement', {
+    user: 'User',
+    transactions: ['Transaction'],
+    settleDifference: Number,
+  });
+
+  PojosMetadataMap.create<SettlementDto>('SettlementDto', {
+    user: 'UserDto',
+    transactions: ['TransactionDto'],
+    settleDifference: Number,
+  });
+}
+
 export function initialiseMapper() {
   createUserMetadata();
   createTransactionMetadata();
+  createSettlementMetadata();
   createMapping();
 }
